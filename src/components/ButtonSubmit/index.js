@@ -1,8 +1,8 @@
 import './ButtonSubmit.css'
 
-const ButtonSubmit = (props) => {
+const ButtonSubmit = (text) => {
     return(
-        <button className='button-submit'>{props.children}</button>
+        <button className='button-submit'>{text.text}</button>
     )
 }
 

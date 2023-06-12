@@ -5,16 +5,18 @@ import TextField from "../TextField"
 
 import './Formulario.css'
 
-const Formulario = (props) => {
+const Formulario = ( {aoColaboradorCadastrado, times, cadastrarTime} ) => {
 
     const [nome, setNome] = useState('')
     const [cargo, setCargo] = useState('')
     const [imagem, setImagem] = useState('')
     const [time, setTime] = useState('')
+    const [nomeTime, setNomeTime] = useState('')
+    const [corTime, setCorTime] = useState('')
 
     const onSave = (event) => {
         event.preventDefault()
-        props.aoColaboradorCadastrado({
+        aoColaboradorCadastrado({
             nome,
             cargo,
             imagem,
@@ -31,32 +33,56 @@ const Formulario = (props) => {
             <form onSubmit={onSave}>
                 <h2>Preencha os dados para criar o card do colaborador</h2>
                 <TextField 
-                    obrigatorio={true}
+                    obrigatorio
                     label="Nome"
                     placeholder="Digite o seu Nome"
                     valor={nome}
-                    aoAlterado={valor => setNome(valor)}/>
+                    aoAlterado={valor => setNome(valor)}
+                />
                 <TextField
-                    obrigatorio={true}
+                    obrigatorio
                     label="Cargo"
                     placeholder="Digite o seu Cargo"
                     valor={cargo}
-                    aoAlterado={valor => setCargo(valor)}/>
+                    aoAlterado={valor => setCargo(valor)}
+                />
                 <TextField
-                    obrigatorio={true}
+                    obrigatorio
                     label="Imagem"
                     placeholder="Informe o endereço da imagem"
                     valor={imagem}
-                    aoAlterado={valor => setImagem(valor)}/>
+                    aoAlterado={valor => setImagem(valor)}
+                />
                 <Dropdown
-                    obrigatorio={true}
+                    obrigatorio
                     label="Time"
-                    itens={props.times}
+                    itens={times}
                     valor={time}
-                    aoAlterado={valor => setTime(valor)}/>
-                <ButtonSubmit>
-                    Criar Card
-                </ButtonSubmit>
+                    aoAlterado={valor => setTime(valor)}
+                />
+                <ButtonSubmit text='Criar Card'/>
+            </form>
+            <form onSubmit={(event) => {
+                event.preventDefault();
+                cadastrarTime({ nome: nomeTime, cor: corTime })
+            }}>
+                <h2>Preencha os dados para criar um novo time</h2>
+                <TextField 
+                    obrigatorio
+                    label="Nome"
+                    placeholder="Digite o nome do time"
+                    valor={nomeTime}
+                    aoAlterado={valor => setNomeTime(valor)}
+                />
+                <TextField
+                    type='color'
+                    obrigatorio
+                    label="Cor"
+                    placeholder="Digite a cor"
+                    valor={corTime}
+                    aoAlterado={valor => setCorTime(valor)}
+                />
+                <ButtonSubmit text='Criar Card'/>
             </form>
         </section>
     )
